@@ -38,7 +38,7 @@ int process() {
 
 
     fbfd = open("/dev/fb1", O_RDWR);
-    if (!fbfd) {
+    if (fbfd == -1) {
         syslog(LOG_ERR, "Unable to open secondary display");
         return -1;
     }
