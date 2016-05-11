@@ -1,14 +1,11 @@
 cmake_minimum_required(VERSION 2.8)
+project(fbcp)
 
-SET(COMPILE_DEFINITIONS -Werror)
+find_package(PkgConfig)
+PKG_CHECK_MODULES(EGL egl)
 
-include_directories(/opt/vc/include)
-include_directories(/opt/vc/include/interface/vcos/pthreads)
-include_directories(/opt/vc/include/interface/vmcs_host)
-include_directories(/opt/vc/include/interface/vmcs_host/linux)
+include_directories(${EGL_INCLUDE_DIRS})
+add_executable(${PROJECT_NAME} main.c)
+target_link_libraries(${PROJECT_NAME} ${EGL_LIBRARIES})
 
-link_directories(/opt/vc/lib)
-
-add_executable(fbcp main.c)
-
-target_link_libraries(fbcp bcm_host)
+install(TARGETS ${PROJECT_NAME} DESTINATION bin)
