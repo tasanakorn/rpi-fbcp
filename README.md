@@ -20,12 +20,12 @@ Build
 
 How To Use
 ----------
-$ ./fbcopy
+$ ./fbcp
 
 Wanna to run from booting
 -------------------------
 $ sudo cp fbcopy /usr/bin
-$ sudo chmod +x /usr/bin/fbcopy
+$ sudo chmod +x /usr/bin/fbcp
 $ sudo nano /etc/rc.local -> add new line before "exit 0" with "/usr/bin/fbcp &" without quote
 $ sudo reboot
 
