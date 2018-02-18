@@ -10,9 +10,8 @@ Tested on Raspberry Pi 3
 Requirement
 -----------
 cmake
-libatlas-base-dev
 
-$ sudo apt-get install cmake libatlas-base-dev -y
+$ sudo apt-get install cmake
 
 Build
 -----
