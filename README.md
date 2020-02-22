@@ -2,39 +2,80 @@ Raspberry Pi Framebuffer Copy
 =============================
 This program used for copy primary framebuffer to secondary framebuffer (eg. FBTFT). It require lastest raspberry pi firmware (> 2013-07-11) to working properly.
 
-Tested on Raspberry Pi 3
-========================
-2017-11-29-raspbian-stretch
+#### Tested on Raspberry Pi B 1,2,3,Z,ZW
+
+  - 2020-02-13-raspbian-buster
+  - 2017-11-29-raspbian-stretch
 
 
-Requirement
------------
-cmake
+#### Requirement
 
-$ sudo apt-get install cmake
-
-Build
------
-
-    $ mkdir build
-    
-    $ cd build
-    
-    $ cmake ..
-    
-    $ make 
+~~~bash
+  sudo apt update
+  sudo apt upgrade -y
+  sudo apt install -y git cmake
+~~~
 
 
-How To Use
-----------
-$ ./fbcp
+#### Build
 
-Wanna to run from booting
--------------------------
-$ sudo cp fbcp /usr/bin
-$ sudo chmod +x /usr/bin/fbcp
-$ sudo nano /etc/rc.local -> add new line before "exit 0" with "/usr/bin/fbcp &" without quote
-$ sudo reboot
+~~~bash
+  cd /tmp
+  git clone https://github.com/tasanakorn/rpi-fbcp.git
+  mkdir -p /tmp/rpi-fbcp/build
+  cd /tmp/rpi-fbcp/build
+  cmake ..
+  make -j $( nproc --all )
+  sudo install fbcp /usr/local/bin/fbcp
+~~~
+
+
+#### How To Use
+
+~~~bash
+  fbcp &
+~~~
+
+
+#### Wanna run automatically at startup
+
+~~~bash
+  sudo cp ./service /etc/init.d/fbcp
+  sudo chmod +x /etc/init.d/fbcp
+  sudo update-rc.d fbcp defaults
+  sudo service fbcp start
+
+
+# control service
+
+
+  sudo service fbcp start   # run fbcp
+  sudo service fbcp stop    # kill fbcp
+  sudo service fbcp status  # check status
+~~~
+
+
+#### Disable / Enable run automatically at startup
+
+~~~bash
+  # Disable
+  sudo service fbcp stop
+  sudo update-rc.d fbcp disable
+
+  # Enable
+  sudo update-rc.d fbcp enable
+  sudo service fbcp start
+
+~~~
+
+#### Cancel run automatically at startup
+
+~~~bash
+  sudo service fbcp stop
+  sudo update-rc.d fbcp disable
+  sudo update-rc.d fbcp remove
+  sudo rm -rf /etc/init.d/fbcp
+~~~
 
 
 License
