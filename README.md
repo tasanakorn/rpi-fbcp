@@ -21,7 +21,7 @@ This program used for copy primary framebuffer to secondary framebuffer (eg. FBT
 
 ~~~bash
   cd /tmp
-  git clone https://github.com/tasanakorn/rpi-fbcp.git
+  git clone https://github.com/TypeNaN/rpi-fbcp.git
   mkdir -p /tmp/rpi-fbcp/build
   cd /tmp/rpi-fbcp/build
   cmake ..
@@ -40,7 +40,7 @@ This program used for copy primary framebuffer to secondary framebuffer (eg. FBT
 #### Wanna run automatically at startup
 
 ~~~bash
-  sudo cp ./service /etc/init.d/fbcp
+  sudo cp /tmp/rpi-fbcp/service /etc/init.d/fbcp
   sudo chmod +x /etc/init.d/fbcp
   sudo update-rc.d fbcp defaults
   sudo service fbcp start
